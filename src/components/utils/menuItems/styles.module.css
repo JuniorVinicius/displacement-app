@@ -14,9 +14,8 @@
   overflow: auto;
 }
 
-.linksContainer li a {
+.linksContainer li span {
   color: var(--base-text-color);
-  text-decoration: none;
 }
 
 .linksContainer li svg {
@@ -24,14 +23,14 @@
   margin-right: 10px;
 }
 
-.active a, .active svg {
+.active span, .active svg {
   color: var(--selected-text-color) !important;
 }
 
 .linksContainer li:hover {
   background: var(--hover-soft-menu);
 }
-.linksContainer > li:hover > a,
+.linksContainer > li:hover > span,
 .linksContainer > li:hover > svg {
   color: var(--selected-text-color);
   cursor: pointer;

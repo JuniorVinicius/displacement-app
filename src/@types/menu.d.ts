@@ -1,5 +1,5 @@
 type MenuProps = {
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 interface MenuItemsProps {

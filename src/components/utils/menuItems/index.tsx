@@ -1,21 +1,29 @@
 "use client";
 import Link from "next/link";
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MenuItems({ menuItems }: MenuItems) {
-  const [selectedItem, setSelectedItem] = useState("");
+  const router = useRouter();
+  const [selectedItem, setSelectedItem] = useState(menuItems[0].path);
+
+  const selectPage = useCallback((path: string) => {
+    setSelectedItem(path);
+    router.push(`/${path}`);
+  }, [router]);
+
   return (
     <ul className={styles.linksContainer}>
       {menuItems?.map(({ path, name, icon }) => {
         return (
           <li
             key={path}
-            onClick={() => setSelectedItem(path)}
+            onClick={() => selectPage(path)}
             className={selectedItem === path ? styles.active : ""}
           >
             {icon}
-            <Link href="">{name}</Link>
+            <span>{name}</span>
           </li>
         );
       })}

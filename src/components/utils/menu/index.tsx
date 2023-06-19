@@ -19,22 +19,22 @@ export default function MenuContainer({ children }: MenuProps) {
       icon: <MdSpaceDashboard {...iconsStyles} />,
     },
     {
-      path: "clientes",
+      path: "clients",
       name: "Clientes",
       icon: <BsPersonFill {...iconsStyles} />,
     },
     {
-      path: "condutores",
+      path: "drivers",
       name: "Condutores",
       icon: <GiCarSeat {...iconsStyles} />,
     },
     {
-      path: "deslocamentos",
+      path: "displacements",
       name: "Deslocamentos",
       icon: <FaMapMarkedAlt {...iconsStyles} />,
     },
     {
-      path: "veiculos",
+      path: "vehicles",
       name: "Veículos",
       icon: <BsFillCarFrontFill {...iconsStyles} />,
     },
@@ -63,7 +63,7 @@ export default function MenuContainer({ children }: MenuProps) {
             )}
           </div>
         </div>
-        <div>{children}</div>
+        <div className={styles.contentContainer}>{children}</div>
       </section>
     </div>
   );
