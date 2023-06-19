@@ -1,0 +1,29 @@
+:root {
+  /*Text Colors*/
+
+  --main-text-color: #000000;
+  --button-light-text-color: #ffffff;
+  --base-text-color: #030229;
+  --selected-text-color: #605bff;
+  --valid-text-color: #3a974c;
+  --invalid-text-color: #d11a2a;
+
+  /*Cards colors*/
+
+  --main-button-color: #605bff;
+  --main-card-color: #ffffff;
+  --valid-bg: #3a974c;
+  --invalid-bg: #d11a2a;
+  --hover-soft-bg: #5b93ff;
+  --hover-soft-menu: #aca9ff1b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fafafb;
+}

@@ -1,0 +1,38 @@
+.linksContainer {
+  width: 100%;
+}
+
+.linksContainer li {
+  width: 100%;
+  list-style: none;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  padding-left: 20px;
+  overflow: auto;
+}
+
+.linksContainer li a {
+  color: var(--base-text-color);
+  text-decoration: none;
+}
+
+.linksContainer li svg {
+  color: var(--base-text-color);
+  margin-right: 10px;
+}
+
+.active a, .active svg {
+  color: var(--selected-text-color) !important;
+}
+
+.linksContainer li:hover {
+  background: var(--hover-soft-menu);
+}
+.linksContainer > li:hover > a,
+.linksContainer > li:hover > svg {
+  color: var(--selected-text-color);
+  cursor: pointer;
+}
