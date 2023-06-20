@@ -12,8 +12,9 @@
 
   --main-button-color: #605bff;
   --main-card-color: #ffffff;
-  --valid-bg: #3a974c;
-  --invalid-bg: #d11a2a;
+  --main-card-dark: #1A2027;
+  --valid-bg: #3bb45347;
+  --invalid-bg: #ea192a33;
   --hover-soft-bg: #5b93ff;
   --hover-soft-menu: #aca9ff1b;
 }

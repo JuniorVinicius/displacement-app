@@ -9,6 +9,7 @@
 
 .contentContainer{
   padding: 20px;
+  width: 100%;
 }
 
 .menuContainer {
@@ -16,7 +17,7 @@
 }
 
 .menuBar {
-  height: 100vh;
+  min-height: 100%;
   background-color: var(--main-card-color);
   transition: width 0.8s;
 }

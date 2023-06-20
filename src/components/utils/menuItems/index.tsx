@@ -2,16 +2,21 @@
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function MenuItems({ menuItems }: MenuItems) {
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState(menuItems[0].path);
+  const params = usePathname();
+  const initialItem = params.length > 1 ? params : `/${menuItems[0].path}`;
+  const [selectedItem, setSelectedItem] = useState(initialItem);
 
-  const selectPage = useCallback((path: string) => {
-    setSelectedItem(path);
-    router.push(`/${path}`);
-  }, [router]);
+  const selectPage = useCallback(
+    (path: string) => {
+      setSelectedItem(path);
+      router.push(path);
+    },
+    [router]
+  );
 
   return (
     <ul className={styles.linksContainer}>
@@ -19,8 +24,8 @@ export default function MenuItems({ menuItems }: MenuItems) {
         return (
           <li
             key={path}
-            onClick={() => selectPage(path)}
-            className={selectedItem === path ? styles.active : ""}
+            onClick={() => selectPage(`/${path}`)}
+            className={selectedItem === `/${path}` ? styles.active : ""}
           >
             {icon}
             <span>{name}</span>
