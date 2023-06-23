@@ -56,9 +56,7 @@ export default function Drivers() {
   return (
     <>
       <TitleHeader page="Condutores" />
-
       <ScrollList data={data} />
-
       {error && (
         <div
           style={{

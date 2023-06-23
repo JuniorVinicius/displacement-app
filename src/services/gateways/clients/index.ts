@@ -4,23 +4,23 @@ export const clientGateway = () => {
   const api = getAPI();
 
   async function getClient() {
-    return api.get("/client");
+    return await api.get("/cliente");
   }
 
   async function getClientById(id?: string) {
-    return api.get(`/client/${id}`);
+    return await api.get(`/cliente/${id}`);
   }
 
   async function updateClient<T>(id?: string, params?: T) {
-    return api.put(`/client/${id}`, params);
+    return await api.put(`/cliente/${id}`, params);
   }
 
   async function deleteClient(id?: string) {
-    return api.delete(`/client/${id}`);
+    return await api.delete(`/cliente/${id}`);
   }
 
   async function createClient<T>(params?: T) {
-    return api.post("/client", params);
+    return await api.post("/cliente", params);
   }
   
   return { getClient, getClientById, updateClient, deleteClient, createClient };

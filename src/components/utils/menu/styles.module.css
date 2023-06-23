@@ -17,7 +17,7 @@
 }
 
 .menuBar {
-  min-height: 100%;
+  min-height: 100vh;
   background-color: var(--main-card-color);
   transition: width 0.8s;
 }
