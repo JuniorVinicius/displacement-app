@@ -4,23 +4,23 @@ export const driverGateway = () => {
   const api = getAPI();
 
   async function getDriver() {
-    return api.get("/condutor");
+    return await api.get("/condutor");
   }
 
-  async function getDriverById(id?: string) {
-    return api.get(`/condutor/${id}`);
+  async function getDriverById(id?: number) {
+    return await api.get(`/condutor/${id}`);
   }
 
-  async function updateDriver<T>(id?: string, params?: T) {
-    return api.put(`/condutor/${id}`, params);
+  async function updateDriver<T>(id?: number, params?: T) {
+    return await api.put(`/condutor/${id}`, params);
   }
 
-  async function deleteDriver(id?: string) {
-    return api.delete(`/condutor/${id}`);
+  async function deleteDriver(id?: number) {
+    return await api.delete(`/condutor/${id}`);
   }
 
   async function createDriver<T>(params?: T) {
-    return api.post("/condutor", params);
+    return await api.post("/condutor", params);
   }
 
   return { getDriver, getDriverById, updateDriver, deleteDriver, createDriver };

@@ -1,5 +1,5 @@
 "use client";
-import { Grid, Menu, MenuItem } from "@mui/material";
+import { Grid, Menu, MenuItem, Typography } from "@mui/material";
 import CardLabel from "../../cardLabel";
 import styles from "./styles.module.css";
 import { BsThreeDots } from "react-icons/bs";
@@ -22,7 +22,11 @@ export default function Item({ label, info }: ItemsProps) {
   let element = null;
 
   if (label !== "Status" && label !== "Ações") {
-    element = <p className={styles.info}>{info}</p>;
+    element = (
+      <Typography noWrap className={styles.info}>
+        {info}
+      </Typography>
+    );
   } else if (label === "Ações") {
     element = (
       <div>
@@ -32,7 +36,6 @@ export default function Item({ label, info }: ItemsProps) {
             color={
               anchorEl ? "var(--selected-text-color)" : "var(--main-text-color)"
             }
-            
           />
         </button>
         <Menu
@@ -50,21 +53,15 @@ export default function Item({ label, info }: ItemsProps) {
       </div>
     );
   } else {
-    element = <CardLabel status="invalid" />;
+    element = <CardLabel status={info as "valid" | "invalid"} />;
   }
 
   return (
-    <Grid
-      item
-      sx={{
-        marginLeft: 2,
-        marginRight: 2,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <p className={styles.label}>{label}</p>
-      {element}
+    <Grid item zeroMinWidth lg>
+      <Typography className={styles.label}>{label}</Typography>
+      <Grid item xs zeroMinWidth>
+        {element}
+      </Grid>
     </Grid>
   );
 }

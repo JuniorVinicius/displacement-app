@@ -3,11 +3,6 @@ import { Grid } from "@mui/material";
 import { CardContainer } from "../utils";
 import Item from "../utils/item";
 
-type ItemsProps = {
-  label: string;
-  info: string;
-};
-
 type CardListProps = {
   cardInfo?: ItemsProps[];
 };
@@ -15,15 +10,7 @@ type CardListProps = {
 export default function CardList({ cardInfo }: CardListProps) {
   return (
     <CardContainer>
-      <Grid
-        container
-        rowSpacing={4}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-        }}
-      >
+      <Grid container wrap="wrap" rowSpacing={4} columnSpacing={12}>
         {cardInfo?.map(({ label, info }, index) => {
           return <Item key={index + label} label={label} info={info} />;
         })}
