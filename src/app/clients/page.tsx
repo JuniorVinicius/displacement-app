@@ -1,7 +1,6 @@
 "use client";
-import { ScrollList, TitleHeader } from "@/components/utils";
+import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { clientGateway } from "@/services/gateways/clients";
-import { Typography } from "@mui/material";
 import useSWR from "swr";
 
 export default function Clients() {
@@ -59,26 +58,13 @@ export default function Clients() {
     }
   }
 
-  const { data, error, isLoading } = useSWR("/api/v1/cliente", fetchVehicle);
+  const { data, error } = useSWR("/api/v1/cliente", fetchVehicle);
 
   return (
     <>
       <TitleHeader page="Clientes" />
       <ScrollList data={data} columnSpacing={4} />
-
-      {error && (
-        <div
-          style={{
-            width: "100%",
-            height: "80vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography>Erro ao listar os clientes!</Typography>
-        </div>
-      )}
+      <ErrorLabel error={error} message="Erro ao listar os clientes!" />
     </>
   );
 }

@@ -1,10 +1,9 @@
 "use client";
-import { ScrollList, TitleHeader } from "@/components/utils";
+import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
+import { convertDate, isAfterDate } from "@/helpers/dateHelper";
 import { driverGateway } from "@/services/gateways/drivers";
-import { Typography } from "@mui/material";
-import moment from "moment";
-
 import useSWR from "swr";
+
 export default function Drivers() {
   async function fetchDrivers() {
     const { getDriver } = driverGateway();
@@ -30,11 +29,11 @@ export default function Drivers() {
           },
           {
             label: "Vencimento",
-            info: moment(driver?.vencimentoHabilitacao).format("DD/MM/YYYY"),
+            info: convertDate(driver?.vencimentoHabilitacao),
           },
           {
             label: "Status",
-            info: moment(today).isAfter(driver?.vencimentoHabilitacao)
+            info: isAfterDate(today, driver?.vencimentoHabilitacao)
               ? "invalid"
               : "valid",
           },
@@ -51,25 +50,13 @@ export default function Drivers() {
     }
   }
 
-  const { data, error, isLoading } = useSWR("/api/v1/condutor", fetchDrivers);
+  const { data, error } = useSWR("/api/v1/condutor", fetchDrivers);
 
   return (
     <>
       <TitleHeader page="Condutores" />
       <ScrollList data={data} />
-      {error && (
-        <div
-          style={{
-            width: "100%",
-            height: "80vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography>Erro ao listar os condutores!</Typography>
-        </div>
-      )}
+      <ErrorLabel error={error} message="Erro ao listar os condutores!" />
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
-import { ScrollList, TitleHeader } from "@/components/utils";
+import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { vehicleGateway } from "@/services/gateways/vehicle";
-import { Typography } from "@mui/material";
 import useSWR from "swr";
 
 export default function Vehicles() {
@@ -43,26 +42,13 @@ export default function Vehicles() {
     }
   }
 
-  const { data, error, isLoading } = useSWR("/api/v1/veiculo", fetchVehicle);
+  const { data, error } = useSWR("/api/v1/veiculo", fetchVehicle);
 
   return (
     <>
       <TitleHeader page="Veículos" />
       <ScrollList data={data} />
-
-      {error && (
-        <div
-          style={{
-            width: "100%",
-            height: "80vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography>Erro ao listar os veículos!</Typography>
-        </div>
-      )}
+      <ErrorLabel error={error} message="Erro ao listar os veículos!" />
     </>
   );
 }
