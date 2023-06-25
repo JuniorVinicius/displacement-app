@@ -2,6 +2,7 @@
 import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { vehicleGateway } from "@/services/gateways/vehicle";
 import useSWR from "swr";
+import Loading from "../loading";
 
 export default function Vehicles() {
   async function fetchVehicle() {
@@ -42,13 +43,19 @@ export default function Vehicles() {
     }
   }
 
-  const { data, error } = useSWR("/api/v1/veiculo", fetchVehicle);
+  const { data, error, isLoading } = useSWR("/api/v1/veiculo", fetchVehicle);
 
   return (
     <>
-      <TitleHeader page="Veículos" />
-      <ScrollList data={data} />
-      <ErrorLabel error={error} message="Erro ao listar os veículos!" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <TitleHeader page="Veículos" />
+          <ScrollList data={data} />
+          <ErrorLabel error={error} message="Erro ao listar os veículos!" />
+        </>
+      )}
     </>
   );
 }

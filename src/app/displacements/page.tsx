@@ -3,6 +3,7 @@ import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { convertDate } from "@/helpers/dateHelper";
 import { displacementGateway } from "@/services/gateways/displacements";
 import useSWR from "swr";
+import Loading from "../loading";
 
 export default function Displacements() {
   async function fetchDisplacement() {
@@ -51,13 +52,25 @@ export default function Displacements() {
     }
   }
 
-  const { data, error } = useSWR("/api/v1/deslocamento", fetchDisplacement);
+  const { data, error, isLoading } = useSWR(
+    "/api/v1/deslocamento",
+    fetchDisplacement
+  );
 
   return (
     <>
-      <TitleHeader page="Deslocamentos" />
-      <ScrollList data={data} columnSpacing={4} />
-      <ErrorLabel error={error} message="Erro ao listar os deslocamentos!" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <TitleHeader page="Deslocamentos" />
+          <ScrollList data={data} columnSpacing={4} />
+          <ErrorLabel
+            error={error}
+            message="Erro ao listar os deslocamentos!"
+          />
+        </>
+      )}
     </>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
+import { Suspense } from "react";
 import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { convertDate, isAfterDate } from "@/helpers/dateHelper";
 import { driverGateway } from "@/services/gateways/drivers";
 import useSWR from "swr";
+import Loading from "../loading";
 
 export default function Drivers() {
   async function fetchDrivers() {
@@ -50,13 +52,19 @@ export default function Drivers() {
     }
   }
 
-  const { data, error } = useSWR("/api/v1/condutor", fetchDrivers);
+  const { data, error, isLoading } = useSWR("/api/v1/condutor", fetchDrivers);
 
   return (
     <>
-      <TitleHeader page="Condutores" />
-      <ScrollList data={data} />
-      <ErrorLabel error={error} message="Erro ao listar os condutores!" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <TitleHeader page="Condutores" />
+          <ScrollList data={data} />
+          <ErrorLabel error={error} message="Erro ao listar os condutores!" />
+        </>
+      )}
     </>
   );
 }

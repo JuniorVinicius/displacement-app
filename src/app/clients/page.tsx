@@ -2,6 +2,7 @@
 import { ErrorLabel, ScrollList, TitleHeader } from "@/components/utils";
 import { clientGateway } from "@/services/gateways/clients";
 import useSWR from "swr";
+import Loading from "../loading";
 
 export default function Clients() {
   async function fetchVehicle() {
@@ -58,13 +59,19 @@ export default function Clients() {
     }
   }
 
-  const { data, error } = useSWR("/api/v1/cliente", fetchVehicle);
+  const { data, error, isLoading } = useSWR("/api/v1/cliente", fetchVehicle);
 
   return (
     <>
-      <TitleHeader page="Clientes" />
-      <ScrollList data={data} columnSpacing={4} />
-      <ErrorLabel error={error} message="Erro ao listar os clientes!" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <TitleHeader page="Clientes" />
+          <ScrollList data={data} columnSpacing={4} />
+          <ErrorLabel error={error} message="Erro ao listar os clientes!" />
+        </>
+      )}
     </>
   );
 }

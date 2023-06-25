@@ -1,3 +1,4 @@
+"use client"
 import { Typography } from "@mui/material";
 import styles from "./styles.module.css";
 type ErrorLabelProps<T> = {
