@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
 import styles from "./styles.module.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function MenuItems({ menuItems }: MenuItems) {
@@ -17,6 +16,10 @@ export default function MenuItems({ menuItems }: MenuItems) {
     },
     [router]
   );
+
+  useEffect(() => {
+    setSelectedItem(params);
+  }, [params]);
 
   return (
     <ul className={styles.linksContainer}>

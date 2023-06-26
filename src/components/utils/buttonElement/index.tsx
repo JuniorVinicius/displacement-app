@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@mui/material";
 import { BsPlus } from "react-icons/bs";
 
@@ -6,7 +6,7 @@ type ButtonProps = {
   name: string;
 };
 
-export default function ButtonElement({ name }: ButtonProps) {
+export default function ButtonElement({ name, ...rest }: ButtonProps) {
   return (
     <Button
       variant="contained"
@@ -18,6 +18,7 @@ export default function ButtonElement({ name }: ButtonProps) {
             : "var(--main-button-color)",
       }}
       startIcon={<BsPlus size={24} />}
+      {...rest}
     >
       {name}
     </Button>

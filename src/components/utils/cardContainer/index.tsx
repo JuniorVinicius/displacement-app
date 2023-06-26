@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Paper } from "@mui/material";
 import { ReactNode } from "react";
 
@@ -16,9 +16,10 @@ export default function CardContainer({ children }: CardContainerProps) {
         marginTop: 2,
         borderRadius: 3,
         flexGrow: 1,
-        boxShadow: "none",
         backgroundColor: (theme) =>
-          theme.palette.mode === "dark" ? "var(--main-card-dark)" : "var(--main-card-color)",
+          theme.palette.mode === "dark"
+            ? "var(--main-card-dark)"
+            : "var(--main-card-color)",
       }}
     >
       {children}

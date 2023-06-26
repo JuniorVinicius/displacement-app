@@ -1,9 +1,8 @@
 "use client";
 import styles from "./styles.module.css";
 import { GiCarSeat } from "react-icons/gi";
-import { MdSpaceDashboard } from "react-icons/md";
 import { BsPersonFill, BsFillCarFrontFill } from "react-icons/bs";
-import { FaMapMarkedAlt } from "react-icons/fa";
+import { FaMapMarkedAlt, FaHome } from "react-icons/fa";
 import MenuItems from "../menuItems";
 import { useState } from "react";
 import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
@@ -15,9 +14,9 @@ export default function MenuContainer({ children }: MenuProps) {
   const iconsStyles = { size: 24 };
   const MENU_ITEMS = [
     {
-      path: "dashboard",
-      name: "Dashboard",
-      icon: <MdSpaceDashboard {...iconsStyles} />,
+      path: "home",
+      name: "Home",
+      icon: <FaHome {...iconsStyles} />,
     },
     {
       path: "clients",
@@ -43,7 +42,7 @@ export default function MenuContainer({ children }: MenuProps) {
 
   return (
     <div className={styles.menuContainer}>
-      <section
+      <div
         className={`${styles.menuBar} ${
           menuIsOpen ? styles.active : styles.inactive
         }`}
@@ -65,8 +64,8 @@ export default function MenuContainer({ children }: MenuProps) {
           <Title type="h6" label="Displacement App" />
         </div>
         <MenuItems menuItems={MENU_ITEMS} />
-      </section>
-      <section className={styles.mainContent}>
+      </div>
+      <div className={styles.mainContent}>
         <div className={styles.headerContainer}>
           <div
             onClick={() => setMenuIsOpen((prev) => !prev)}
@@ -80,7 +79,7 @@ export default function MenuContainer({ children }: MenuProps) {
           </div>
         </div>
         <div className={styles.contentContainer}>{children}</div>
-      </section>
+      </div>
     </div>
   );
 }

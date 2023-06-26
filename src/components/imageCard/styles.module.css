@@ -1,0 +1,14 @@
+.container {
+  min-width: 390px;
+}
+
+.container:hover {
+  cursor: pointer;
+  filter: brightness(.95);
+}
+
+@media (max-width: 450px) {
+  .container {
+    min-width: 250px;
+  }
+}
