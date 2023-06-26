@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MenuContainer>{children}</MenuContainer>
+          <MenuContainer>{children}</MenuContainer>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ export default function MenuItems({ menuItems }: MenuItems) {
           <li
             key={path}
             onClick={() => selectPage(`/${path}`)}
-            className={selectedItem === `/${path}` ? styles.active : ""}
+            className={selectedItem.includes(`/${path}`) ? styles.active : ""}
           >
             {icon}
             <span>{name}</span>
