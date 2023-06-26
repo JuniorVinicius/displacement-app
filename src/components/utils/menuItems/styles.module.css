@@ -23,7 +23,8 @@
   margin-right: 10px;
 }
 
-.active span, .active svg {
+.active span,
+.active svg {
   color: var(--selected-text-color) !important;
 }
 
@@ -34,4 +35,10 @@
 .linksContainer > li:hover > svg {
   color: var(--selected-text-color);
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .linksContainer li {
+    justify-content: center;
+  }
 }

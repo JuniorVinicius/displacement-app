@@ -11,12 +11,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }
 
-.logoContainer h6{
+.logoContainer h6 {
   font-weight: bold;
   color: var(--main-logo-color);
-  
 }
 
 .contentContainer {
@@ -32,6 +32,7 @@
   min-height: 100vh;
   background-color: var(--main-card-color);
   transition: width 0.8s;
+  overflow: auto;
 }
 
 .mainContent {
@@ -53,4 +54,35 @@
 
 .button svg {
   cursor: pointer;
+}
+
+.innerButton {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .menuBar {
+    position: absolute;
+    z-index: 100;
+  }
+
+  .active {
+    width: 100%;
+  }
+  
+  .inactive {
+    width: 0px;
+  }
+
+  .buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+
+  .innerButton {
+    display: block;
+  }
 }

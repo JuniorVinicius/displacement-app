@@ -10,7 +10,7 @@ import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
 import Title from "../title";
 
 export default function MenuContainer({ children }: MenuProps) {
-  const [menuIsOpen, setMenuIsOpen] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const iconsStyles = { size: 24 };
   const MENU_ITEMS = [
@@ -48,9 +48,21 @@ export default function MenuContainer({ children }: MenuProps) {
           menuIsOpen ? styles.active : styles.inactive
         }`}
       >
+        <div className={styles.buttonContainer}>
+          <div
+            onClick={() => setMenuIsOpen((prev) => !prev)}
+            className={`${styles.button} ${styles.innerButton}`}
+          >
+            {menuIsOpen ? (
+              <RiMenuFoldLine size={24} />
+            ) : (
+              <RiMenuUnfoldLine size={24} />
+            )}
+          </div>
+        </div>
         <div className={styles.logoContainer}>
           <FaMapMarkedAlt size={68} color="var(--main-logo-color)" />
-          <Title type="h6" label="Displacement App"/>
+          <Title type="h6" label="Displacement App" />
         </div>
         <MenuItems menuItems={MENU_ITEMS} />
       </section>
@@ -58,7 +70,7 @@ export default function MenuContainer({ children }: MenuProps) {
         <div className={styles.headerContainer}>
           <div
             onClick={() => setMenuIsOpen((prev) => !prev)}
-            className={styles.button}
+            className={`${styles.button} ${styles.defaultButton}`}
           >
             {menuIsOpen ? (
               <RiMenuFoldLine size={24} />
