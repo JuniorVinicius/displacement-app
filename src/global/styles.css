@@ -12,7 +12,7 @@
 
   --main-button-color: #605bff;
   --main-card-color: #ffffff;
-  --main-card-dark: #1A2027;
+  --main-card-dark: #1a2027;
   --valid-bg: #3bb45347;
   --invalid-bg: #ea192a33;
   --hover-soft-bg: #5b93ff;
@@ -31,4 +31,23 @@
 body {
   background-color: #fafafb;
   overflow: hidden;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #605bff transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #605bff;
+  border-radius: 10px;
+  border: 2px solid transparent;
 }

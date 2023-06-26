@@ -11,7 +11,7 @@
   cursor: pointer;
   transition: 0.3s;
   padding-left: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .linksContainer li span {
