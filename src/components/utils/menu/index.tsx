@@ -7,6 +7,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import MenuItems from "../menuItems";
 import { useState } from "react";
 import { RiMenuUnfoldLine, RiMenuFoldLine } from "react-icons/ri";
+import Title from "../title";
 
 export default function MenuContainer({ children }: MenuProps) {
   const [menuIsOpen, setMenuIsOpen] = useState(true);
@@ -47,7 +48,10 @@ export default function MenuContainer({ children }: MenuProps) {
           menuIsOpen ? styles.active : styles.inactive
         }`}
       >
-        <div className={styles.logoContainer}></div>
+        <div className={styles.logoContainer}>
+          <FaMapMarkedAlt size={68} color="var(--main-logo-color)" />
+          <Title type="h6" label="Displacement App"/>
+        </div>
         <MenuItems menuItems={MENU_ITEMS} />
       </section>
       <section className={styles.mainContent}>

@@ -17,6 +17,9 @@
   --invalid-bg: #ea192a33;
   --hover-soft-bg: #5b93ff;
   --hover-soft-menu: #aca9ff1b;
+
+  /*Logo colors*/
+  --main-logo-color: #605bff;
 }
 
 * {
