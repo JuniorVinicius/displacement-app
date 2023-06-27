@@ -15,6 +15,7 @@ export default function Displacements() {
 
       displacements.forEach((displacement) => {
         listOfDisplacements.push([
+          { label: "id", info: displacement?.id.toString() },
           {
             label: "Deslocamento Inicial",
             info: convertDate(displacement?.inicioDeslocamento),
@@ -64,7 +65,7 @@ export default function Displacements() {
       ) : (
         <>
           <TitleHeader page="Deslocamentos" />
-          <ScrollList data={data} columnSpacing={4} />
+          <ScrollList data={data} columnSpacing={4} type="displacement" />
           <ErrorLabel
             error={error}
             message="Erro ao listar os deslocamentos!"

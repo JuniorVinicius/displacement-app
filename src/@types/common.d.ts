@@ -3,8 +3,10 @@ type ItemsProps = {
   info: string;
 };
 
+type UsersType = "client" | "vehicle" | "displacement" | "driver"
+
 type FormProps = {
-  type: "client" | "vehicle" | "displacement" | "driver",
+  type: UsersType,
   actions: "edit" | "create"
 }
 

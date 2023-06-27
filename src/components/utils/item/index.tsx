@@ -8,9 +8,10 @@ import { useState } from "react";
 type ItemsProps = {
   label: string;
   info: string;
+  onClick?: () => void
 };
 
-export default function Item({ label, info }: ItemsProps) {
+export default function Item({ label, info, onClick }: ItemsProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,7 +58,7 @@ export default function Item({ label, info }: ItemsProps) {
   }
 
   return (
-    <Grid item zeroMinWidth lg>
+    <Grid item zeroMinWidth lg onClick={onClick}>
       <Typography className={styles.label}>{label}</Typography>
       <Grid item xs zeroMinWidth>
         {element}

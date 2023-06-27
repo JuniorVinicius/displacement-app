@@ -7,15 +7,15 @@ export const vehicleGateway = () => {
     return await api.get("/veiculo");
   }
 
-  async function getVehicleById(id?: number) {
+  async function getVehicleById(id?: string) {
     return await api.get(`/veiculo/${id}`);
   }
 
-  async function updateVehicle<T>(id?: number, params?: T) {
+  async function updateVehicle<T>(id?: string, params?: T) {
     return await api.put(`/veiculo/${id}`, params);
   }
 
-  async function deleteVehicle(id?: number) {
+  async function deleteVehicle(id?: string) {
     return await api.delete(`/veiculo/${id}`);
   }
 

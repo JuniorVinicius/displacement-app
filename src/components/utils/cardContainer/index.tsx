@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 
 type CardContainerProps = {
   children: ReactNode;
+  onClick?: () => void
 };
 
-export default function CardContainer({ children }: CardContainerProps) {
+export default function CardContainer({ children, onClick }: CardContainerProps) {
   return (
     <Paper
       sx={{
@@ -16,11 +17,16 @@ export default function CardContainer({ children }: CardContainerProps) {
         marginTop: 2,
         borderRadius: 3,
         flexGrow: 1,
+        cursor: "pointer",
         backgroundColor: (theme) =>
           theme.palette.mode === "dark"
             ? "var(--main-card-dark)"
             : "var(--main-card-color)",
+        ":hover": {
+          filter: "brightness(.95)" 
+        }
       }}
+      onClick={onClick}
     >
       {children}
     </Paper>

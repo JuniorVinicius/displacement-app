@@ -18,6 +18,10 @@ export default function Drivers() {
       drivers.forEach((driver) => {
         listOfDrivers.push([
           {
+            label: "id",
+            info: driver?.id.toString()
+          },
+          {
             label: "Nome",
             info: driver?.nome,
           },
@@ -61,7 +65,7 @@ export default function Drivers() {
       ) : (
         <>
           <TitleHeader page="Condutores" />
-          <ScrollList data={data} />
+          <ScrollList data={data} type="driver"/>
           <ErrorLabel error={error} message="Erro ao listar os condutores!" />
         </>
       )}

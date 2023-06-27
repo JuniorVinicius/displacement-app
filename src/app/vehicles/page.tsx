@@ -15,6 +15,10 @@ export default function Vehicles() {
       vehicles.forEach((vehicle) => {
         lisOfVehicles.push([
           {
+            label: "id",
+            info: vehicle?.id.toString()
+          },
+          {
             label: "Marca/Modelo",
             info: vehicle?.marcaModelo,
           },
@@ -52,7 +56,7 @@ export default function Vehicles() {
       ) : (
         <>
           <TitleHeader page="Veículos" />
-          <ScrollList data={data} />
+          <ScrollList data={data} type="vehicle"/>
           <ErrorLabel error={error} message="Erro ao listar os veículos!" />
         </>
       )}

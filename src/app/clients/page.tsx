@@ -15,6 +15,10 @@ export default function Clients() {
       clients.forEach((client) => {
         listOfClients.push([
           {
+            label: "id",
+            info: client?.id.toString()
+          },
+          {
             label: "Nome",
             info: client?.nome,
           },
@@ -68,7 +72,7 @@ export default function Clients() {
       ) : (
         <>
           <TitleHeader page="Clientes" />
-          <ScrollList data={data} columnSpacing={4} />
+          <ScrollList data={data} columnSpacing={4} type="client" />
           <ErrorLabel error={error} message="Erro ao listar os clientes!" />
         </>
       )}
