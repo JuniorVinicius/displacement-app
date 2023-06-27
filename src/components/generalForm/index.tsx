@@ -1,5 +1,5 @@
 "use client";
-import { Grid } from "@mui/material";
+import { Alert, AlertTitle, Grid } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -15,32 +15,97 @@ import { clientGateway } from "@/services/gateways/clients";
 import { driverGateway } from "@/services/gateways/drivers";
 import { displacementGateway } from "@/services/gateways/displacements";
 import { vehicleGateway } from "@/services/gateways/vehicle";
+import { ButtonElement, SelectCompoent } from "../utils";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
+import { AxiosResponse } from "axios";
+
+interface IAlert {
+  title: string;
+  type: "success" | "error" | "info" | "warning";
+  message: string;
+  display: boolean;
+}
+
+interface UserSelect {
+  url: string;
+  itemToGet: "nome" | "placa";
+  fetcher: () => Promise<AxiosResponse<any, any>>;
+}
+
+interface UserSelectProps {
+  client: UserSelect;
+  driver: UserSelect;
+  vehicle: UserSelect;
+}
 
 export default function GeneralForm({
   type = "client",
   actions = "create",
 }: FormProps) {
-  const { createClient } = clientGateway();
-  const { createDriver } = driverGateway();
+  const { createClient, getClient } = clientGateway();
+  const { createDriver, getDriver } = driverGateway();
   const { createDisplacement } = displacementGateway();
-  const { createVehicle } = vehicleGateway();
+  const { createVehicle, getVehicle } = vehicleGateway();
+  const [alert, setAlert] = useState<IAlert>({
+    title: "",
+    type: "success",
+    message: "",
+    display: false,
+  });
+  const [elementSelected, setSelected] = useState({
+    client: "",
+    driver: "",
+    vehicle: "",
+  });
 
+  const userSelectProps: UserSelectProps = {
+    client: {
+      url: "/api/v1/cliente",
+      itemToGet: "nome",
+      fetcher: getClient,
+    },
+    driver: {
+      url: "/api/v1/condutor",
+      itemToGet: "nome",
+      fetcher: getDriver,
+    },
+    vehicle: {
+      url: "/api/v1/veiculo",
+      itemToGet: "placa",
+      fetcher: getVehicle,
+    },
+  };
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    type: "client" | "driver" | "vehicle"
+  ) => {
+    setSelected((prev) => {
+      return { ...prev, [type]: event.target.value };
+    });
+  };
+  const router = useRouter();
   async function onSubmit(data: any) {
     try {
       let date = "";
-      if (data.displacementInit || data.expiration) {
-        const dateToConvert = data.displacementInit || data.expiration;
+      if (data.inicioDeslocamento || data.vencimentoHabilitacao) {
+        const dateToConvert =
+          data.inicioDeslocamento || data.vencimentoHabilitacao;
         date = moment(dateToConvert?.$d).toString();
       }
-      await schemas.create[type].validate(data, {
-        abortEarly: true,
-      });
+      await schemas.create[type].validate(
+        { ...data, date },
+        {
+          abortEarly: true,
+        }
+      );
       if (actions === "create") {
         createElement(data);
       } else {
         editElement(data);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   }
@@ -50,16 +115,27 @@ export default function GeneralForm({
       if (type === "client") {
         await createClient(data);
       } else if (type === "displacement") {
-        await createDisplacement(
-          moment(data.displacementInit?.$d).toString(),
-          data
-        );
+        await createDisplacement(data);
       } else if (type === "driver") {
         await createDriver(data);
       } else {
         await createVehicle(data);
       }
-    } catch (error) {}
+      setAlert({
+        type: "success",
+        title: "Sucesso",
+        message: "Criado com sucesso",
+        display: true,
+      });
+      router.push(`/${type}s`);
+    } catch (error) {
+      setAlert({
+        type: "error",
+        title: "Erro",
+        message: "Ocorreu um erro ao criar",
+        display: true,
+      });
+    }
   }
 
   async function editElement(data: any) {}
@@ -86,6 +162,21 @@ export default function GeneralForm({
           <TextFieldElement {...basicProps} multiline rows={2} fullWidth />
         </Grid>
       );
+    } else if (input?.type === "select") {
+      const index = input.userType ? input.userType : "client";
+      const userInfo = userSelectProps[index];
+      return (
+        <Grid item key={input.name} width="100%">
+          <SelectCompoent
+            fetcher={userInfo.fetcher}
+            handleChange={(e) => handleChange(e, index)}
+            itemToGet={userInfo.itemToGet}
+            {...basicProps}
+            url={userInfo.url}
+            value={elementSelected[index]}
+          />
+        </Grid>
+      );
     }
 
     return (
@@ -97,18 +188,20 @@ export default function GeneralForm({
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {alert.display ? (
+        <Alert severity={alert.type}>
+          <AlertTitle>{alert.title}</AlertTitle>
+          {alert.message}
+        </Alert>
+      ) : null}
       <div className={styles.container}>
         <FormContainer onSuccess={onSubmit}>
-          <Grid
-            container
-            columnSpacing={1}
-            rowSpacing={2}
-            sx={{
-              marginTop: 3,
-            }}
-          >
+          <Grid container columnSpacing={1} rowSpacing={2}>
             {RENDER_INPUTS}
           </Grid>
+          <div className={styles.button}>
+            <ButtonElement name="Salvar" type="submit" />
+          </div>
         </FormContainer>
       </div>
     </LocalizationProvider>

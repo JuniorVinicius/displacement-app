@@ -55,7 +55,7 @@ export default function Vehicles() {
         <Loading />
       ) : (
         <>
-          <TitleHeader page="Veículos" />
+          <TitleHeader page="Veículos" type="vehicle" />
           <ScrollList data={data} type="vehicle"/>
           <ErrorLabel error={error} message="Erro ao listar os veículos!" />
         </>

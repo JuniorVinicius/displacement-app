@@ -15,6 +15,7 @@ interface FieldsProps {
   name: string;
   type?: string;
   required?: boolean;
+  userType?: "client" | "vehicle" | "driver";
 }
 
 type FieldsTypes = {

@@ -5,6 +5,7 @@ import ButtonElement from "./buttonElement";
 import TitleHeader from "./titleHeader";
 import ScrollList from "./scrollList";
 import ErrorLabel from "./errorLabel";
+import SelectCompoent from "./selectComponent"
 export {
   MenuContainer,
   Title,
@@ -13,4 +14,5 @@ export {
   TitleHeader,
   ScrollList,
   ErrorLabel,
+  SelectCompoent
 };

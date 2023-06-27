@@ -2,64 +2,64 @@ export const INPUTS_FIELDS: FieldsTypes = {
     client: [
       {
         label: "Nome",
-        name: "Name",
+        name: "nome",
         required: true,
       },
       {
         label: "Tipo de documento",
-        name: "document",
+        name: "tipoDocumento",
         required: true,
       },
       {
         label: "Número do documento",
-        name: "documentNumber",
+        name: "numeroDocumento",
         required: true,
       },
       {
         label: "Cidade",
-        name: "city",
+        name: "cidade",
         required: true,
       },
       {
         label: "Bairro",
-        name: "neighborhood",
+        name: "bairro",
         required: true,
       },
       {
         label: "Número",
-        name: "number",
+        name: "numero",
         required: true,
       },
       {
         label: "Logradouro",
-        name: "reference",
+        name: "logradouro",
         required: true,
       },
       {
         label: "UF",
-        name: "state",
+        name: "uf",
         required: true,
       },
     ],
     driver: [
       {
         label: "Nome",
-        name: "Name",
+        name: "nome",
         required: true,
       },
       {
         label: "Número da CNH",
-        name: "cnhNumber",
+        name: "numeroHabilitacao",
         required: true,
       },
       {
         label: "Categoria",
-        name: "category",
+        name: "categoriaHabilitacao",
         required: true,
       },
       {
         label: "Vencimento da CNH",
-        name: "expiration",
+        name: "vencimentoHabilitacao",
         type: "date",
         required: true,
       },
@@ -67,34 +67,34 @@ export const INPUTS_FIELDS: FieldsTypes = {
     vehicle: [
       {
         label: "Placa",
-        name: "plate",
+        name: "placa",
         required: true,
       },
       {
         label: "Marca/Modelo",
-        name: "model",
+        name: "marcaModelo",
         required: true,
       },
       {
         label: "Ano",
-        name: "year",
+        name: "anoFabricacao",
         required: true,
       },
       {
         label: "Km Atual",
-        name: "km",
+        name: "kmAtual",
         required: true,
       },
     ],
     displacement: [
       {
         label: "Km inicial",
-        name: "initialKm",
+        name: "kmInicial",
         required: true,
       },
       {
         label: "Inicio do deslocamento",
-        name: "displacementInit",
+        name: "inicioDeslocamento",
         type: "date",
         required: true,
       },
@@ -104,26 +104,32 @@ export const INPUTS_FIELDS: FieldsTypes = {
       },
       {
         label: "Condutor",
-        name: "driver",
+        name: "idCondutor",
         required: true,
+        type: "select",
+        userType: "driver"
       },
       {
         label: "Veículo",
-        name: "vehicle",
+        name: "idVeiculo",
         required: true,
+        type: "select",
+        userType: "vehicle"
       },
       {
         label: "Cliente",
-        name: "client",
+        name: "idCliente",
+        type: "select",
+        userType: "client"
       },
       {
         label: "Motivo",
-        name: "reason",
+        name: "motivo",
         type: "area",
       },
       {
         label: "Observação",
-        name: "observation",
+        name: "observacao",
         type: "area",
       },
     ],

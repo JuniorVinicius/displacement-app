@@ -64,7 +64,7 @@ export default function Displacements() {
         <Loading />
       ) : (
         <>
-          <TitleHeader page="Deslocamentos" />
+          <TitleHeader page="Deslocamentos" type="displacement" />
           <ScrollList data={data} columnSpacing={4} type="displacement" />
           <ErrorLabel
             error={error}

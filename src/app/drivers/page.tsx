@@ -64,7 +64,7 @@ export default function Drivers() {
         <Loading />
       ) : (
         <>
-          <TitleHeader page="Condutores" />
+          <TitleHeader page="Condutores" type="driver" />
           <ScrollList data={data} type="driver"/>
           <ErrorLabel error={error} message="Erro ao listar os condutores!" />
         </>

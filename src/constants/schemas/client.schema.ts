@@ -1,12 +1,12 @@
 import * as yup from "yup";
 
 export const CreateClientSchema = yup.object({
-  name: yup.string().required("Campo obrigatório!"),
-  city: yup.string().required("Campo obrigatório!"),
-  document: yup.string().required("Campo obrigatório!"),
-  documentNumber: yup.string().required("Campo obrigatório!"),
-  neighborhood: yup.string().required("Campo obrigatório!"),
-  number: yup.string().required("Campo obrigatório!"),
-  reference: yup.string().required("Campo obrigatório!"),
-  state: yup.string().required("Campo obrigatório!"),
-})
+  nome: yup.string().required(),
+  cidade: yup.string().required(),
+  tipoDocumento: yup.string().required(),
+  numeroDocumento: yup.string().required(),
+  bairro: yup.string().required(),
+  numero: yup.string().required(),
+  logradouro: yup.string().required(),
+  uf: yup.string().required(),
+});

@@ -71,7 +71,7 @@ export default function Clients() {
         <Loading />
       ) : (
         <>
-          <TitleHeader page="Clientes" />
+          <TitleHeader page="Clientes" type="client"/>
           <ScrollList data={data} columnSpacing={4} type="client" />
           <ErrorLabel error={error} message="Erro ao listar os clientes!" />
         </>
