@@ -24,3 +24,10 @@ type FieldsTypes = {
   displacement: FieldsProps[];
   driver: FieldsProps[];
 };
+
+interface IAlert {
+  title: string;
+  type: "success" | "error" | "info" | "warning";
+  message: string;
+  display: boolean;
+}

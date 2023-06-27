@@ -11,12 +11,20 @@ export const displacementGateway = () => {
     return api.get(`/deslocamento/${id}`);
   }
 
-  async function updateDisplacement<T>(id?: string, params?: T) {
-    return api.put(`/deslocamento/${id}`, params);
+  async function updateDisplacement<T>(
+    id?: string,
+    endDisplacement?: string,
+    params?: T
+  ) {
+    return api.put(`/deslocamento/${id}/${endDisplacement}`, params);
   }
 
-  async function deleteDisplacement(id?: string, endDisplacement?: string) {
-    return api.delete(`/deslocamento/${id}/${endDisplacement}`);
+  async function deleteDisplacement(id: string) {
+    return api.delete(`/deslocamento/${id}`, {
+      data: {
+        id,
+      },
+    });
   }
 
   async function createDisplacement<T>(params?: T) {

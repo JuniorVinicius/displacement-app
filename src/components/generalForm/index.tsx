@@ -20,13 +20,6 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { AxiosResponse } from "axios";
 
-interface IAlert {
-  title: string;
-  type: "success" | "error" | "info" | "warning";
-  message: string;
-  display: boolean;
-}
-
 interface UserSelect {
   url: string;
   itemToGet: "nome" | "placa";

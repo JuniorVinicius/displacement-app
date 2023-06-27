@@ -12,6 +12,7 @@ export default function CardContainer({ children, onClick }: CardContainerProps)
     <Paper
       sx={{
         p: 4,
+        paddingRight: 6,
         margin: "auto",
         minWidth: "100%",
         marginTop: 2,
