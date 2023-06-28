@@ -6,3 +6,8 @@ export const CreateDriverSchema = yup.object({
   categoriaHabilitacao: yup.string().required(),
   vencimentoHabilitacao: yup.string().required(),
 })
+
+export const EditDriverSchema = yup.object({
+  categoriaHabilitacao: yup.string(),
+  vencimentoHabilitacao: yup.string(),
+})

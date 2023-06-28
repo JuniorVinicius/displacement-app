@@ -10,3 +10,13 @@ export const CreateClientSchema = yup.object({
   logradouro: yup.string().required(),
   uf: yup.string().required(),
 });
+
+export const EditClientSchema = yup.object({
+  nome: yup.string(),
+  cidade: yup.string(),
+  tipoDocumento: yup.string(),
+  bairro: yup.string(),
+  numero: yup.string(),
+  logradouro: yup.string(),
+  uf: yup.string(),
+});

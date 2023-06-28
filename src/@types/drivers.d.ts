@@ -5,3 +5,9 @@ type Driver = {
   catergoriaHabilitacao: string;
   vencimentoHabilitacao: string;
 };
+
+type EditDrivers = {
+  id: number;
+  catergoriaHabilitacao: string;
+  vencimentoHabilitacao: string;
+};

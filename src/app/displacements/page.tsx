@@ -65,7 +65,7 @@ export default function Displacements() {
       ) : (
         <>
           <TitleHeader page="Deslocamentos" type="displacement" />
-          <ScrollList data={data} columnSpacing={4} type="displacement" />
+          <ScrollList data={data} type="displacement" />
           <ErrorLabel
             error={error}
             message="Erro ao listar os deslocamentos!"

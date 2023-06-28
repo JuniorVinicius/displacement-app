@@ -9,7 +9,7 @@ type ScrollListProps = {
 export default function ScrollList({ data, columnSpacing, type }: ScrollListProps) {
   return (
     <div className={styles.container}>
-      {data?.reverse().map((item, index) => {
+      {data?.map((item, index) => {
         return <CardList key={index} cardInfo={item} columnSpacing={columnSpacing} type={type}/>;
       })}
     </div>

@@ -26,7 +26,7 @@ export default function ProfileUser({
                   <CardContent>
                     <Typography fontSize={12}>{label}</Typography>
                     {label !== "Status" ? (
-                      <Typography fontWeight="semi-bold">{info}</Typography>
+                      <Typography fontWeight="semi-bold">{info ? info : "-"}</Typography>
                     ) : (
                       <CardLabel status={info as "valid" | "invalid"} />
                     )}

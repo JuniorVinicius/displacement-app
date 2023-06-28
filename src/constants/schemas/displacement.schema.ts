@@ -10,3 +10,9 @@ export const CreateDisplacementSchema = yup.object({
   motivo: yup.string(),
   observacao: yup.string(),
 })
+
+export const EditDisplacementSchema = yup.object({
+  kmFinal: yup.number().required(),
+  fimDeslocamento: yup.string().required(),
+  observacao: yup.string(),
+})

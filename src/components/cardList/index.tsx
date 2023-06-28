@@ -2,7 +2,6 @@
 import {
   Alert,
   AlertTitle,
-  CardContent,
   CircularProgress,
   Grid,
   Menu,
@@ -41,10 +40,13 @@ export default function CardList({
   });
   const open = Boolean(anchorEl);
   const router = useRouter();
-  const id = useMemo(() => cardInfo![0].info, [cardInfo]);
+  const id = useMemo(
+    () => (cardInfo?.length ? cardInfo[0].info : ""),
+    [cardInfo]
+  );
+
   const click = () => {
     cardInfo?.length ? router.push(`/${type}s/${cardInfo[0].info}`) : null;
-    console.log("click");
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -87,6 +89,12 @@ export default function CardList({
     handleClose();
     setIsDeleting(false);
   };
+
+  const onEdit = () => {
+    router.push(`${type}s/form/edit-${id}`);
+    handleClose();
+  };
+
   const element = (
     <div>
       <button className={styles.button} onClick={handleClick}>
@@ -106,7 +114,7 @@ export default function CardList({
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Editar</MenuItem>
+        <MenuItem onClick={onEdit}>Editar</MenuItem>
         <MenuItem onClick={onDelete}>Excluir</MenuItem>
       </Menu>
     </div>
@@ -136,17 +144,19 @@ export default function CardList({
           columnSpacing={columnSpacing ? columnSpacing : 12}
           alignItems="center"
         >
-          {cardInfo?.map(({ label, info }, index) => {
-            if (label !== "id" && label !== "Ações")
-              return (
-                <Item
-                  onClick={click}
-                  key={cardInfo[0].info + index}
-                  label={label}
-                  info={info}
-                />
-              );
-          })}
+          {cardInfo?.length
+            ? cardInfo?.map((item, index) => {
+                if (item.label !== "id" && item.label !== "Ações")
+                  return (
+                    <Item
+                      onClick={click}
+                      key={cardInfo[0].info + index}
+                      label={item.label}
+                      info={item.info}
+                    />
+                  );
+              })
+            : null}
           <Grid item zeroMinWidth lg>
             <Typography className={styles.label}>Ações</Typography>
             <Grid item xs zeroMinWidth>

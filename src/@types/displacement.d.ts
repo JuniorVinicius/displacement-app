@@ -11,3 +11,12 @@ type Displacements = {
   idVeiculo: number;
   idCliente: number;
 };
+
+
+type DisplacementsEdit = {
+  id: number;
+  kmFinal: number;
+  fimDeslocamento: string;
+  observacao: string
+  inicioDeslocamento?: string;
+}

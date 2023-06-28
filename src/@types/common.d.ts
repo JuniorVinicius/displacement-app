@@ -3,12 +3,17 @@ type ItemsProps = {
   info: string;
 };
 
-type UsersType = "client" | "vehicle" | "displacement" | "driver"
+type UsersType = "client" | "vehicle" | "displacement" | "driver";
+
+
+type DataEdit = EditClients | EditDrivers | DisplacementsEdit | EditVehicles
 
 type FormProps = {
-  type: UsersType,
-  actions: "edit" | "create"
-}
+  type: UsersType;
+  actions: "edit" | "create";
+  id?: string;
+  data?: DataEdit;
+};
 
 interface FieldsProps {
   label: string;
@@ -18,11 +23,16 @@ interface FieldsProps {
   userType?: "client" | "vehicle" | "driver";
 }
 
-type FieldsTypes = {
+interface IFields {
   client: FieldsProps[];
   vehicle: FieldsProps[];
   displacement: FieldsProps[];
   driver: FieldsProps[];
+}
+
+type FieldsTypes = {
+  create: IFields;
+  edit: IFields;
 };
 
 interface IAlert {

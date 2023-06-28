@@ -1,5 +1,5 @@
 "use client";
-import { Alert, AlertTitle, Grid } from "@mui/material";
+import { Alert, AlertTitle, CircularProgress, Grid } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -17,8 +17,9 @@ import { displacementGateway } from "@/services/gateways/displacements";
 import { vehicleGateway } from "@/services/gateways/vehicle";
 import { ButtonElement, SelectCompoent } from "../utils";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
+import dayjs from "dayjs";
 
 interface UserSelect {
   url: string;
@@ -35,11 +36,14 @@ interface UserSelectProps {
 export default function GeneralForm({
   type = "client",
   actions = "create",
+  id,
+  data,
 }: FormProps) {
-  const { createClient, getClient } = clientGateway();
-  const { createDriver, getDriver } = driverGateway();
-  const { createDisplacement } = displacementGateway();
-  const { createVehicle, getVehicle } = vehicleGateway();
+  const { createClient, getClient, updateClient } = clientGateway();
+  const { createDriver, getDriver, updateDriver } = driverGateway();
+  const { createDisplacement, updateDisplacement } = displacementGateway();
+  const { createVehicle, getVehicle, updateVehicle } = vehicleGateway();
+  const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState<IAlert>({
     title: "",
     type: "success",
@@ -87,7 +91,7 @@ export default function GeneralForm({
           data.inicioDeslocamento || data.vencimentoHabilitacao;
         date = moment(dateToConvert?.$d).toString();
       }
-      await schemas.create[type].validate(
+      await schemas[actions][type].validate(
         { ...data, date },
         {
           abortEarly: true,
@@ -104,6 +108,7 @@ export default function GeneralForm({
   }
 
   async function createElement(data: any) {
+    setIsLoading(true);
     try {
       if (type === "client") {
         await createClient(data);
@@ -117,7 +122,7 @@ export default function GeneralForm({
       setAlert({
         type: "success",
         title: "Sucesso",
-        message: "Criado com sucesso",
+        message: "Criado com sucesso!",
         display: true,
       });
       router.push(`/${type}s`);
@@ -125,27 +130,62 @@ export default function GeneralForm({
       setAlert({
         type: "error",
         title: "Erro",
-        message: "Ocorreu um erro ao criar",
+        message: "Ocorreu um erro ao criar!",
         display: true,
       });
     }
+    setIsLoading(false);
   }
 
-  async function editElement(data: any) {}
+  async function editElement(data: any) {
+    setIsLoading(true);
+    try {
+      if (type === "client") {
+        await updateClient(id, data);
+      } else if (type === "displacement") {
+        await updateDisplacement(id, data);
+      } else if (type === "driver") {
+        await updateDriver(id, data);
+      } else {
+        await updateVehicle(id, data);
+      }
+      setAlert({
+        type: "success",
+        title: "Sucesso",
+        message: "Editado com sucesso!",
+        display: true,
+      });
+      router.push(`/${type}s`);
+    } catch (error) {
+      setAlert({
+        type: "error",
+        title: "Erro",
+        message: "Ocorreu um erro ao editar!",
+        display: true,
+      });
+    }
+    setIsLoading(false);
+  }
 
-  const RENDER_INPUTS = INPUTS_FIELDS[type].map((input) => {
+  const RENDER_INPUTS = INPUTS_FIELDS[actions][type]?.map((input) => {
     const basicProps = {
       label: input.label,
       required: input?.required,
       name: input.name,
     };
     if (input?.type === "date") {
+      const date = data as Displacements;
       return (
         <Grid item key={input.name} width="100%">
           <DatePickerElement
             {...basicProps}
             format="DD/MM/YYYY"
             sx={{ minWidth: "100%" }}
+            minDate={
+              actions === "edit" && type === "displacement"
+                ? dayjs(date?.inicioDeslocamento)
+                : null
+            }
           />
         </Grid>
       );
@@ -179,6 +219,23 @@ export default function GeneralForm({
     );
   });
 
+  let initialData = { ...data };
+
+  if (type === "displacement" && actions === "edit") {
+    const date = data as DisplacementsEdit;
+    initialData = {
+      ...initialData,
+      fimDeslocamento: dayjs(date?.fimDeslocamento),
+    };
+  } else if (type === "driver" && actions === "edit") {
+    const driverData = data as EditDrivers;
+    initialData = {
+      id: driverData?.id,
+      categoriaHabilitacao: driverData?.catergoriaHabilitacao,
+      vencimentoHabilitacao: dayjs(driverData?.vencimentoHabilitacao),
+    };
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       {alert.display ? (
@@ -188,13 +245,17 @@ export default function GeneralForm({
         </Alert>
       ) : null}
       <div className={styles.container}>
-        <FormContainer onSuccess={onSubmit}>
+        <FormContainer onSuccess={onSubmit} defaultValues={initialData}>
           <Grid container columnSpacing={1} rowSpacing={2}>
             {RENDER_INPUTS}
           </Grid>
-          <div className={styles.button}>
-            <ButtonElement name="Salvar" type="submit" />
-          </div>
+          {!isLoading ? (
+            <div className={styles.button}>
+              <ButtonElement name="Salvar" type="submit" />
+            </div>
+          ) : (
+            <CircularProgress />
+          )}
         </FormContainer>
       </div>
     </LocalizationProvider>
