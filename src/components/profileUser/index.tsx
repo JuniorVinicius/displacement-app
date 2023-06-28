@@ -20,7 +20,7 @@ export default function ProfileUser({
       {!error ? (
         <Card sx={{ width: "100%" }}>
           <Grid container columnSpacing={6} justifyContent="center">
-            {data.map(({ label, info }, index) => {
+            {data?.map(({ label, info }, index) => {
               return (
                 <Grid key={index} item minWidth={300}>
                   <CardContent>

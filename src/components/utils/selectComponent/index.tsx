@@ -37,16 +37,18 @@ export default function SelectCompoent({
   const fetchELement = async () => {
     const response = await fetcher();
     const data = response.data as Items[];
-    return data?.map((item, index) => {
-      return (
-        <MenuItem key={item.id + index} value={item.id}>
-          {item[itemToGet]}
-        </MenuItem>
-      );
-    });
+    return data;
   };
 
-  const { data, error } = useSWR(url, fetchELement);
+  const { data, error, isLoading } = useSWR(url, fetchELement);
+
+  const RENDER_ITEMS = data?.map((item, index) => {
+    return (
+      <MenuItem key={item.id + index} value={item.id}>
+        {item[itemToGet]}
+      </MenuItem>
+    );
+  });
 
   return (
     <>
@@ -69,7 +71,7 @@ export default function SelectCompoent({
         {error ? (
           <ErrorLabel error={error} message="Erro ao listar items" />
         ) : (
-          data
+          !isLoading && RENDER_ITEMS
         )}
       </TextFieldElement>
     </>

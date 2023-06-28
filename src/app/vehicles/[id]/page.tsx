@@ -28,11 +28,7 @@ export default function VehiclePage() {
         {
           label: "Km",
           info: vehicle?.kmAtual,
-        },
-        {
-          label: "Ações",
-          info: "",
-        },
+        }
       ];
 
       return vehicleFormated;
