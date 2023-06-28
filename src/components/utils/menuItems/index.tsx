@@ -8,7 +8,6 @@ export default function MenuItems({ menuItems }: MenuItems) {
   const params = usePathname();
   const initialItem = params.length > 1 ? params : `/${menuItems[0].path}`;
   const [selectedItem, setSelectedItem] = useState(initialItem);
-
   const selectPage = useCallback(
     (path: string) => {
       setSelectedItem(path);
@@ -24,11 +23,17 @@ export default function MenuItems({ menuItems }: MenuItems) {
   return (
     <ul className={styles.linksContainer}>
       {menuItems?.map(({ path, name, icon }) => {
+        const isActive = selectedItem.includes(`/${path}`);
         return (
           <li
             key={path}
             onClick={() => selectPage(`/${path}`)}
-            className={selectedItem.includes(`/${path}`) ? styles.active : ""}
+            className={
+              isActive ||
+              (`/${path}` === `/${menuItems[0].path}` && params === "/")
+                ? styles.active
+                : ""
+            }
           >
             {icon}
             <span>{name}</span>
